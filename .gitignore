@@ -1,0 +1,56 @@
+# --- Asset safety: never commit raw or private project material ---
+01_ORIGINAL_PHOTOS/
+02_WORKING_PHOTOS/
+03_ASSET_INVENTORY/
+04_EVENT_CONTENT/
+05_OUTPUTS/
+00_REFERENCES/
+raw/
+originals/
+drive-download*/
+*WhatsApp*
+*whatsapp*
+
+# Raw / heavy media (final optimised web assets are added deliberately)
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.m4v
+*.heic
+*.HEIC
+*.tif
+*.tiff
+*.psd
+*.raw
+*.cr2
+*.nef
+*.dng
+
+# Registries, manifests and backups
+*.csv
+*.bak
+*.backup
+*_backup*
+*manifest*
+COMPLETE_ASSET_UNIVERSE.md
+
+# Tooling (for the later frontend build)
+node_modules/
+dist/
+.vite/
+.env
+.env.*
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

@@ -1,0 +1,77 @@
+/* Colours taken from 00_REFERENCES/EVENT_WEBSITE/visual-identity-notes.txt */
+:root {
+  --cream: #FFF1E7;        /* warm cream */
+  --forest: #0A241E;       /* deep forest green */
+  --mid-green: #1B5F50;    /* mid green */
+  --sage: #849D75;         /* sage green */
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--forest);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.stage {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  animation: fade 1.6s ease-out both;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(0.78rem, 1.4vw, 0.95rem);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+
+.age {
+  margin: 0.12em 0 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(7rem, 26vw, 17rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--mid-green);
+}
+
+.rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  margin: clamp(20px, 3vw, 32px) 0;
+  background: var(--sage);
+}
+
+.line {
+  margin: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+  color: var(--forest);
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage { animation: none; }
+}
