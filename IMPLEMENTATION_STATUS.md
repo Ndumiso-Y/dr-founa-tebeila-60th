@@ -44,6 +44,25 @@ the prints are shown at 620 px tall and never enlarged. No dates, places beyond 
 client-confirmed Pretoria context, relationships or occasions are stated; filename
 order is kept and is not a claim about exact chronology.
 
+**QA of the revision (2026-09-19, Playwright + Chromium):**
+- Local: all 44 scenes at 1920×1080 and 1280×800 — every image loaded, nothing
+  outside the stage, four fonts loaded, 0 errors. Two real-time loops:
+  374.76 s / 374.81 s, 1,504 DOM samples, 0 blank, no scene held.
+- Controls (local and live, scripted key presses): → next, ← previous; Space held
+  the pause 11 s past the slot end, then resumed with exactly one entry per scene
+  (no double timers; `s03` slot measured 11.01 s); F entered and left fullscreen;
+  wake lock requested; 0 buttons/toolbars/HUD in the DOM; autoplay starts on the
+  opening. Reduced motion and `prototype.html` still pass.
+- Live (commit 1e42f7f, GitHub Pages built): all 124 deployed URLs return 200,
+  including the six new images; root holding page byte-identical to the original;
+  two real-time loops 374.78 s / 374.81 s, 89 scene changes in order, 0 blank
+  samples, 0 errors, first frame ~3 s. Loop seam re-measured in-page and unchanged
+  (opening opacity 0.02 / 0.16 / 0.63 / 0.93 / 1.0 at 0.2 / 0.5 / 1.0 / 1.5 / 1.9 s).
+- Follow-up in the next commit: FT-0467's derivative crop tightened by ~1 % to
+  remove a thin wedge of table background at the print's top-right corner.
+- Review stills: `05_OUTPUTS\FULL_BUILD_REVIEW\YOUNG_FONA_REVISION\`.
+- Not done, by instruction: no backup video, no root launch.
+
 ## What exists now
 | Item | Value |
 |---|---|
