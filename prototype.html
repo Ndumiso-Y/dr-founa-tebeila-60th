@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dr Founa Tebeila · 60 — Prototype</title>
+  <meta name="description" content="Three-screen design prototype — Dr Founa Tebeila · 60 · A Celebration in Shades of Green">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0A241E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230A241E'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' fill='%23FFF1E7' text-anchor='middle'%3E60%3C/text%3E%3C/svg%3E">
+  <link rel="preload" as="image" href="assets/img/ft-0274.jpg">
+  <link rel="preload" as="image" href="assets/img/ft-0197.jpg">
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/playfair-display-latin-500-normal.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/dm-sans-latin-400-normal.woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/stage.css">
+  <link rel="stylesheet" href="assets/css/scenes.css">
+</head>
+<body>
+  <div class="viewport">
+    <main class="stage" aria-label="Dr Founa Tebeila 60th birthday presentation prototype">
+
+      <!-- ============================================================
+           SCREEN 1 · OPENING OPTION C — WHITE STUDIO · FT-0274
+           ============================================================ -->
+      <section class="scene s1" id="screen-1" aria-label="Opening option C: White Studio">
+        <img class="s1__photo fx-photo" src="assets/img/ft-0274.jpg"
+             alt="Studio portrait of Dr Founa Tebeila in a denim shirt, smiling warmly">
+        <div class="s1__block">
+          <h1 class="s1__numeral fx-rise" aria-label="60">60</h1>
+          <p class="s1__overline fx-rise fx-d1">Celebrating</p>
+          <p class="s1__name fx-rise fx-d1">Dr&nbsp;Founa&nbsp;Tebeila</p>
+          <span class="s1__rule fx-rise fx-d2" aria-hidden="true"></span>
+          <p class="s1__date fx-rise fx-d2">19&thinsp;.&thinsp;09&thinsp;.&thinsp;2026</p>
+          <p class="s1__line fx-rise fx-d3">A Celebration in Shades of Green</p>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SCREEN 2 · EDITORIAL STORY SCENE — 05 · WEDDING DAY
+           Archival pair · FT-0155 + FT-0157
+           ============================================================ -->
+      <section class="scene s2" id="screen-2" aria-label="Chapter five, Wedding Day — archival editorial scene">
+        <div class="s2__ghost fx-ghost" aria-hidden="true">05</div>
+
+        <div class="s2__col">
+          <p class="s2__overline fx-rise">Chapter&nbsp;05</p>
+          <h2 class="s2__title fx-rise fx-d1">Wedding<br>Day</h2>
+          <span class="s2__rule fx-rise fx-d2" aria-hidden="true"></span>
+          <p class="s2__note fx-rise fx-d2">From the family archive</p>
+        </div>
+
+        <figure class="mount s2__mount-a fx-mount fx-d1">
+          <img src="assets/img/ft-0155.jpg"
+               alt="Archival photograph: Founa in a pink beaded headwrap and blue traditional dress, outdoors in natural light">
+          <figcaption>Founa&rsquo;s Wedding Day &middot; family archive</figcaption>
+        </figure>
+
+        <figure class="mount s2__mount-b fx-mount fx-d2">
+          <img src="assets/img/ft-0157.jpg"
+               alt="Archival photograph: an embrace with an elder in a white headscarf">
+          <figcaption>Family archive</figcaption>
+        </figure>
+      </section>
+
+      <!-- ============================================================
+           SCREEN 3 · OPENING OPTION B — THE WALL · FT-0197
+           ============================================================ -->
+      <section class="scene s3 scene--dark" id="screen-3" aria-label="Opening option B: The Wall">
+        <img class="s3__photo" src="assets/img/ft-0197.jpg"
+             alt="Dr Founa Tebeila standing small against a vast stone wall with an arched niche">
+        <div class="s3__grade" aria-hidden="true"></div>
+        <div class="s3__ghost fx-ghost3" aria-hidden="true">60</div>
+        <p class="s3__overline fx-rise">Celebrating sixty years</p>
+        <p class="s3__name fx-rise fx-d1">Founa<br>Tebeila</p>
+        <span class="s3__rule fx-rise fx-d2" aria-hidden="true"></span>
+        <p class="s3__date fx-rise fx-d2">19&thinsp;.&thinsp;09&thinsp;.&thinsp;2026</p>
+      </section>
+
+      <!-- Review navigation (prototype only) -->
+      <nav class="deck-nav" aria-label="Prototype screens">
+        <button type="button" class="is-current">01&nbsp;&middot;&nbsp;Studio</button>
+        <button type="button">02&nbsp;&middot;&nbsp;Wedding</button>
+        <button type="button">03&nbsp;&middot;&nbsp;Wall</button>
+      </nav>
+
+    </main>
+  </div>
+
+  <script src="assets/js/stage.js"></script>
+  <script src="assets/js/deck.js"></script>
+</body>
+</html>

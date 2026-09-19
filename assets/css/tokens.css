@@ -1,0 +1,66 @@
+/* ==========================================================================
+   DESIGN TOKENS — Dr Founa Tebeila · 60
+   Source of truth: 03_ASSET_INVENTORY/DESIGN_CONSTITUTION.md
+   Colours from 00_REFERENCES/EVENT_WEBSITE/visual-identity-notes.txt
+   ========================================================================== */
+
+:root {
+  /* ---- Shades of Green identity ---- */
+  --forest:   #0A241E;
+  --teal:     #2FA38A;
+  --sage:     #849D75;
+  --cream:    #FFF1E7;
+  --mint:     #F0F9F7;
+  --ink-soft: rgba(10, 36, 30, 0.62);
+  --ink-faint: rgba(10, 36, 30, 0.38);
+  --mount-line: rgba(10, 36, 30, 0.12);
+
+  /* ---- Typography ---- */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-text:    "DM Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Logical 1920x1080 type scale */
+  --size-numeral-hero: 560px;   /* the "60" */
+  --size-numeral-ghost: 780px;  /* chapter ghost numerals */
+  --size-name: 96px;
+  --size-chapter-title: 122px;
+  --size-overline: 16px;
+  --size-caption: 14px;
+  --size-small: 15px;
+
+  --ls-overline: 0.24em;
+  --ls-small: 0.16em;
+
+  /* ---- Motion (Constitution §8) ---- */
+  --t-standard: 900ms;
+  --t-seam: 1800ms;
+  --t-loop-seam: 2000ms;
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-slow: cubic-bezier(0.33, 0.0, 0.15, 1);
+
+  /* ---- Stage ---- */
+  --stage-w: 1920;
+  --stage-h: 1080;
+}
+
+/* ---- Self-hosted fonts (event Wi-Fi resilience) ---- */
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/playfair-display-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal; font-weight: 500; font-display: swap;
+  src: url("../fonts/playfair-display-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url("../fonts/dm-sans-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal; font-weight: 500; font-display: swap;
+  src: url("../fonts/dm-sans-latin-500-normal.woff2") format("woff2");
+}

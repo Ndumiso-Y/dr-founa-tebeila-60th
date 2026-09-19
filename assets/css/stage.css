@@ -1,0 +1,79 @@
+/* ==========================================================================
+   16:9 STAGE — fixed 1920x1080 design canvas, scaled uniformly to fit.
+   Letterbox bars are deep forest. All scene layout uses design pixels.
+   ========================================================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: var(--forest);
+  overflow: hidden;
+  font-family: var(--font-text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.viewport {
+  position: fixed;
+  inset: 0;
+  background: var(--forest);
+}
+
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--stage-w) * 1px);
+  height: calc(var(--stage-h) * 1px);
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: center center;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+/* ---- Scenes ---- */
+.scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--t-standard) var(--ease-slow),
+              visibility 0s linear var(--t-standard);
+}
+.scene.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--t-standard) var(--ease-slow);
+}
+
+/* ---- Review navigation (prototype only, deliberately quiet) ---- */
+.deck-nav {
+  position: absolute;
+  right: 44px;
+  bottom: 32px;
+  z-index: 40;
+  display: flex;
+  gap: 26px;
+  font-family: var(--font-text);
+  font-size: 13px;
+  letter-spacing: var(--ls-small);
+}
+.deck-nav button {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 4px 2px;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ink-faint);
+  border-bottom: 1px solid transparent;
+  transition: color 300ms var(--ease-out), border-color 300ms var(--ease-out);
+}
+.deck-nav button.is-current { color: var(--forest); border-color: var(--teal); }
+.deck-nav.on-dark button { color: rgba(255, 241, 231, 0.45); }
+.deck-nav.on-dark button.is-current { color: var(--cream); border-color: var(--teal); }
+
+@media (prefers-reduced-motion: reduce) {
+  .scene, .scene * { transition-duration: 1ms !important; animation: none !important; }
+}

@@ -1,0 +1,289 @@
+/* ==========================================================================
+   SCENE COMPOSITIONS — three-screen prototype
+   Archetypes: HERO SPLIT (S1) · SINGLE/PAIR ARCHIVAL ARTIFACT (S2) ·
+   FULL-BLEED CINEMATIC (S3). Design pixels on the 1920x1080 stage.
+   ========================================================================== */
+
+/* ==========================================================================
+   SCREEN 1 — OPENING OPTION C · WHITE STUDIO (FT-0274)
+   ========================================================================== */
+.s1 {
+  background:
+    linear-gradient(112deg, #F1F5F7 0%, #F0F6F4 46%, #F3F4EC 100%);
+}
+.s1__photo {
+  position: absolute;
+  left: 118px;
+  top: 0;
+  height: 1080px;
+  width: 720px;
+  object-fit: cover;
+  /* dissolve the studio sweep into the canvas — no hard seam */
+  -webkit-mask-image: linear-gradient(to right, #000 78%, transparent 99%);
+          mask-image: linear-gradient(to right, #000 78%, transparent 99%);
+}
+.s1__block {
+  position: absolute;
+  left: 920px;
+  top: 0;
+  width: 900px;
+  height: 1080px;
+}
+.s1__overline {
+  position: absolute;
+  left: 60px;
+  top: 208px;
+  font-size: var(--size-overline);
+  font-weight: 500;
+  letter-spacing: var(--ls-overline);
+  color: var(--teal);
+  text-transform: uppercase;
+}
+.s1__numeral {
+  position: absolute;
+  left: 22px;
+  top: 168px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--size-numeral-hero);
+  line-height: 1;
+  color: var(--forest);
+  letter-spacing: -0.02em;
+}
+.s1__name {
+  position: absolute;
+  left: 62px;
+  top: 768px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 88px;
+  line-height: 1.08;
+  color: var(--forest);
+  white-space: nowrap;
+}
+.s1__rule {
+  position: absolute;
+  left: 64px;
+  top: 902px;
+  width: 132px;
+  height: 1px;
+  background: var(--teal);
+}
+.s1__date {
+  position: absolute;
+  left: 64px;
+  top: 926px;
+  font-size: var(--size-small);
+  font-weight: 500;
+  letter-spacing: var(--ls-small);
+  color: var(--ink-soft);
+}
+.s1__line {
+  position: absolute;
+  left: 64px;
+  top: 956px;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* entrance */
+.s1 .fx-rise { opacity: 0; transform: translateY(26px); }
+.s1.is-active .fx-rise {
+  opacity: 1; transform: none;
+  transition: opacity 1100ms var(--ease-slow), transform 1100ms var(--ease-slow);
+}
+.s1 .fx-photo { opacity: 0; }
+.s1.is-active .fx-photo {
+  opacity: 1;
+  transition: opacity 1400ms var(--ease-slow);
+}
+.s1.is-active .fx-d1 { transition-delay: 250ms; }
+.s1.is-active .fx-d2 { transition-delay: 420ms; }
+.s1.is-active .fx-d3 { transition-delay: 560ms; }
+
+/* ==========================================================================
+   SCREEN 2 — "05 · WEDDING DAY" ARCHIVAL PAIR
+   ========================================================================== */
+.s2 { background: var(--cream); }
+
+.s2__ghost {
+  position: absolute;
+  right: 96px;
+  top: -76px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--size-numeral-ghost);
+  line-height: 1;
+  color: var(--forest);
+  opacity: 0.055;
+  letter-spacing: -0.03em;
+  user-select: none;
+}
+.s2__col {
+  position: absolute;
+  left: 140px;
+  top: 292px;
+  width: 560px;
+}
+.s2__overline {
+  font-size: var(--size-overline);
+  font-weight: 500;
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.s2__title {
+  margin-top: 30px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--size-chapter-title);
+  line-height: 1.02;
+  color: var(--forest);
+}
+.s2__rule {
+  margin-top: 44px;
+  width: 128px;
+  height: 1px;
+  background: var(--sage);
+}
+.s2__note {
+  margin-top: 26px;
+  font-size: 16px;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+/* archival mounts — Constitution §5.1 */
+.mount {
+  position: absolute;
+  background: #FFF8F1;
+  border: 1px solid var(--mount-line);
+  box-shadow: 0 24px 60px rgba(10, 36, 30, 0.10);
+  padding: 18px 18px 14px;
+}
+.mount img {
+  display: block;
+  /* deliberate inset crop: hides the uneven scanner margins of the print (≤1.5%) */
+  clip-path: inset(10px);
+  margin: -10px;
+}
+.mount figcaption {
+  padding-top: 12px;
+  font-size: 12px;
+  letter-spacing: var(--ls-small);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.s2__mount-a { right: 214px; top: 118px; }
+.s2__mount-a img { height: 660px; width: auto; }
+.s2__mount-b { right: 736px; top: 470px; }
+.s2__mount-b img { height: 430px; width: auto; }
+
+/* entrance */
+.s2 .fx-rise { opacity: 0; transform: translateY(24px); }
+.s2 .fx-mount { opacity: 0; transform: translateY(34px); }
+.s2.is-active .fx-rise,
+.s2.is-active .fx-mount {
+  opacity: 1; transform: none;
+  transition: opacity 1100ms var(--ease-slow), transform 1100ms var(--ease-slow);
+}
+.s2.is-active .fx-d1 { transition-delay: 220ms; }
+.s2.is-active .fx-d2 { transition-delay: 400ms; }
+.s2.is-active .fx-ghost { opacity: 0.055; transition: opacity 1600ms var(--ease-slow) 500ms; }
+.s2 .fx-ghost { opacity: 0; }
+
+/* ==========================================================================
+   SCREEN 3 — OPENING OPTION B · THE WALL (FT-0197)
+   ========================================================================== */
+.s3 { background: var(--forest); }
+.s3__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%; /* derivative is a pre-composed 16:9 art crop */
+}
+.s3.is-active .s3__photo { animation: s3-drift 26s var(--ease-slow) alternate infinite; }
+@keyframes s3-drift {
+  from { transform: scale(1.015) translateX(0); }
+  to   { transform: scale(1.055) translateX(-16px); }
+}
+/* Forest grade: light over the alcove, deeper over the open stone field on the
+   right where the type sits (seats cream type without flattening the wall). */
+.s3__grade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(10, 36, 30, 0.22) 0%,
+    rgba(10, 36, 30, 0.06) 40%,
+    rgba(10, 36, 30, 0.10) 62%,
+    rgba(10, 36, 30, 0.46) 100%);
+  mix-blend-mode: multiply;
+}
+/* Type column lives in the empty stone field right of the figure (x ≥ 1300):
+   clear of her face (≈ x 870–1010) and of her extended hand (≈ x 1150). */
+.s3__ghost {
+  position: absolute;
+  left: 1286px;
+  top: 96px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 470px;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 241, 231, 0.34);
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+.s3__overline {
+  position: absolute;
+  left: 1304px;
+  top: 606px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 241, 231, 0.86);
+}
+.s3__name {
+  position: absolute;
+  left: 1300px;
+  top: 648px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 108px;
+  line-height: 1.02;
+  color: var(--cream);
+}
+.s3__rule {
+  position: absolute;
+  left: 1304px;
+  top: 904px;
+  width: 120px;
+  height: 1px;
+  background: var(--teal);
+}
+.s3__date {
+  position: absolute;
+  left: 1304px;
+  top: 928px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: var(--ls-small);
+  color: rgba(255, 241, 231, 0.66);
+}
+
+/* entrance */
+.s3 .fx-rise { opacity: 0; transform: translateY(22px); }
+.s3.is-active .fx-rise {
+  opacity: 1; transform: none;
+  transition: opacity 1200ms var(--ease-slow), transform 1200ms var(--ease-slow);
+}
+.s3 .fx-ghost3 { opacity: 0; }
+.s3.is-active .fx-ghost3 { opacity: 1; transition: opacity 1900ms var(--ease-slow) 600ms; }
+.s3.is-active .fx-d1 { transition-delay: 300ms; }
+.s3.is-active .fx-d2 { transition-delay: 480ms; }

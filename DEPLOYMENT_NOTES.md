@@ -29,3 +29,14 @@ The final presentation (fullscreen 16:9, auto-looping) has **not** been started.
 3. **Build output.** Branch/root deployment serves the files as committed. A Vite build produces `dist/`, so when switching, either move Pages to **GitHub Actions** as the source (official `actions/deploy-pages` workflow) or publish the built output deliberately. Update this file when that changes.
 4. **Assets.** Only commit selected, web-optimised images (resized, compressed, stripped of metadata). Never commit anything from `01_ORIGINAL_PHOTOS`, `02_WORKING_PHOTOS`, raw Drive/WhatsApp downloads, archive scans, raw video, ZIPs, inventories or manifests. `.gitignore` blocks the common cases, but check `git status` before each commit.
 5. **Keep separate.** The asset-management workflow (FT IDs, `photo-inventory.csv`, manifests) lives outside this repository and must not be modified from here.
+
+## Prototype (2026-09-19)
+
+The live three-screen design prototype is served at
+`/prototype.html` → https://ndumiso-y.github.io/dr-founa-tebeila-60th/prototype.html
+while the root holding page stays unchanged. Static architecture (no build
+step): `assets/css/` tokens + stage + scenes, `assets/js/` stage scaler +
+deck engine, self-hosted woff2 fonts in `assets/fonts/`, and only the four
+prototype photographs (web derivatives, canonical FT IDs) in `assets/img/`.
+See IMPLEMENTATION_STATUS.md for details and remaining work. Pages
+deployment method unchanged (branch `main`, root).
