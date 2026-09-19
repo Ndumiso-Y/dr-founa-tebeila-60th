@@ -1,0 +1,202 @@
+/* ==========================================================================
+   DECK — full presentation scene system (manifest-driven).
+   Geometry lives in assets/js/sequence.js in design pixels; this file holds
+   the shared materials: canvases, mounts, type roles, entrances, seams.
+   The approved prototype compositions (.s2 Wedding, .s3 The Wall) are reused
+   verbatim from scenes.css.
+   ========================================================================== */
+
+.deck-auto, .deck-auto * { cursor: none; }
+.deck-auto.is-debug, .deck-auto.is-debug * { cursor: auto; }
+.deck-auto .stage { background: var(--forest); }
+
+/* ---- Scene stacking: the incoming scene dissolves in ON TOP of the outgoing
+        one, which stays fully opaque beneath it — no dip to the canvas colour,
+        so no flash at any seam (including the loop seam). ---- */
+.deck-auto .scene { transition: none; z-index: 0; }
+.deck-auto .scene.is-active {
+  z-index: 1;
+  transition: opacity var(--t-in, 900ms) var(--ease-in, var(--ease-slow));
+}
+.deck-auto .scene.is-top { z-index: 3; }
+
+/* ---- Canvases ---- */
+.sc--cream  { background: var(--cream); }
+.sc--mint   { background: var(--mint); }
+.sc--forest { background: var(--forest); }
+.sc--studio { background: linear-gradient(112deg, #F1F5F7 0%, #F0F6F4 46%, #F3F4EC 100%); }
+
+/* ---- Chapter seam: a colour field wipes across, the scene changes beneath it ---- */
+.seam {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  visibility: hidden;
+  will-change: transform;
+}
+.seam.is-on { visibility: visible; }
+.seam--cream  { background: var(--cream); }
+.seam--mint   { background: var(--mint); }
+.seam--forest { background: var(--forest); }
+
+/* ---- Items ---- */
+.it { position: absolute; }
+
+/* photographs without a mount (consumer digital / contemporary) */
+.ph { overflow: hidden; background: rgba(10, 36, 30, 0.06); }
+.ph img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.ph--soft-right {
+  -webkit-mask-image: linear-gradient(to right, #000 78%, transparent 99%);
+          mask-image: linear-gradient(to right, #000 78%, transparent 99%);
+  background: none;
+}
+
+/* mounts for derivatives whose scanner margins are already trimmed */
+.mount--clean { padding: var(--pad, 16px); }
+.mount--clean img { clip-path: none; margin: 0; }
+.mount--clean figcaption { padding-top: 11px; margin-bottom: -4px; }
+.sc--forest .mount { box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22); border-color: rgba(255, 241, 231, 0.10); }
+
+/* ---- Type roles ---- */
+.tx { white-space: nowrap; }
+.tx-overline {
+  font-size: var(--size-overline);
+  font-weight: 500;
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.tx-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--size-chapter-title);
+  line-height: 1.02;
+  color: var(--forest);
+}
+.tx-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 108px;
+  line-height: 1.02;
+  color: var(--cream);
+}
+.tx-note { font-size: 16px; letter-spacing: 0.02em; color: var(--ink-soft); }
+.tx-cap {
+  font-size: 12px;
+  letter-spacing: var(--ls-small);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.tx-date { font-size: 14px; font-weight: 500; letter-spacing: var(--ls-small); color: var(--ink-soft); }
+.tx-ghost {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--size-numeral-ghost);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--forest);
+  user-select: none;
+}
+.tx-numeral {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--forest);
+}
+.tx-outline {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 2.5px rgba(255, 241, 231, 0.47);
+  user-select: none;
+}
+/* On the flat forest field: stroke first, then a canvas-coloured fill, so the
+   glyph's self-overlapping contours (the crossing strokes of the "4") vanish. */
+.tx-outline--strong {
+  color: var(--forest);
+  paint-order: stroke fill;
+  -webkit-text-stroke: 6px rgba(255, 241, 231, 0.8);
+}
+.rule { height: 1px; background: var(--sage); }
+.rule--teal { background: var(--teal); }
+
+.sc--forest .tx-title,
+.sc--dark .tx-title   { color: var(--cream); }
+.sc--forest .tx-ghost { color: var(--cream); }
+.sc--forest .tx-note,
+.sc--dark .tx-note    { color: rgba(255, 241, 231, 0.66); }
+.sc--forest .tx-cap,
+.sc--dark .tx-cap     { color: rgba(255, 241, 231, 0.5); }
+.sc--forest .tx-date,
+.sc--dark .tx-date    { color: rgba(255, 241, 231, 0.66); }
+.sc--dark .tx-overline { color: rgba(255, 241, 231, 0.86); letter-spacing: 0.3em; font-size: 15px; }
+
+/* ---- Entrances (played when the engine adds .on; replayed every loop) ---- */
+.fx {
+  opacity: 0;
+  transition: opacity 1100ms var(--ease-slow), transform 1100ms var(--ease-slow),
+              clip-path 1300ms var(--ease-slow);
+  transition-delay: var(--d, 0ms);
+}
+.fx-rise   { transform: translateY(24px); }
+.fx-mount  { transform: translateY(34px); }
+.fx-settle { transform: scale(1.05); transform-origin: 30% 60%; transition-duration: 1700ms; }
+.fx-reveal { opacity: 1; clip-path: inset(0 0 100% 0); }
+.fx-land   { transform: translateY(18px) scale(1.015); transition-duration: 800ms; }
+.fx-ghost  { transition-duration: 1700ms; }
+.fx.on        { opacity: 1; transform: none; }
+.fx-reveal.on { clip-path: inset(0 0 0 0); } /* only reveals clip: large type keeps its descenders */
+.fx-ghost.on  { opacity: var(--ghost, 0.055); }
+.fx.off-again { opacity: 0; transform: scale(1.06); transition-duration: 1500ms; transition-delay: 0ms; }
+
+/* ---- Photographic drift (<= 4%), runs for the life of the scene ---- */
+.scene.is-active .drift-in  { animation: drift-in  var(--dur, 9s) linear both; }
+.scene.is-active .drift-out { animation: drift-out var(--dur, 9s) linear both; }
+.scene.is-active .drift-l   { animation: drift-l   var(--dur, 9s) linear both; }
+@keyframes drift-in  { from { transform: scale(1); }     to { transform: scale(1.04); } }
+@keyframes drift-out { from { transform: scale(1.04); }  to { transform: scale(1); } }
+@keyframes drift-l   { from { transform: scale(1.035) translateX(0.7%); } to { transform: scale(1.035) translateX(-0.7%); } }
+
+/* ---- The Wall: one extra line under the date (opening only) ---- */
+.s3__line {
+  position: absolute;
+  left: 1304px;
+  top: 960px;
+  font-size: 12px;
+  letter-spacing: var(--ls-overline);
+  text-transform: uppercase;
+  color: rgba(255, 241, 231, 0.56);
+}
+
+/* ---- 54 -> 60 ---- */
+.n60__field {
+  inset: 0;
+  background: var(--cream);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1700ms var(--ease-slow);
+}
+.n60__field.on { clip-path: inset(0 0 0 0); }
+
+/* ---- Closing ---- */
+.close__grade {
+  inset: 0;
+  /* seats the cream type in the window panes right of her profile; her face stays ungraded */
+  background: linear-gradient(270deg, rgba(10, 36, 30, 0.58) 0%, rgba(10, 36, 30, 0.34) 24%, rgba(10, 36, 30, 0) 42%);
+  mix-blend-mode: multiply;
+}
+
+/* ---- Debug HUD (only with ?debug=1) ---- */
+.hud {
+  position: fixed;
+  left: 12px;
+  bottom: 10px;
+  z-index: 99;
+  padding: 5px 9px;
+  font: 500 12px/1.3 var(--font-text);
+  letter-spacing: 0.06em;
+  color: #FFF1E7;
+  background: rgba(10, 36, 30, 0.78);
+}

@@ -40,3 +40,25 @@ deck engine, self-hosted woff2 fonts in `assets/fonts/`, and only the four
 prototype photographs (web derivatives, canonical FT IDs) in `assets/img/`.
 See IMPLEMENTATION_STATUS.md for details and remaining work. Pages
 deployment method unchanged (branch `main`, root).
+
+## Full presentation (2026-09-19)
+
+The complete 11-movement presentation is served at
+`/presentation.html` → https://ndumiso-y.github.io/dr-founa-tebeila-60th/presentation.html
+
+- The root holding page (`index.html`, `styles.css`) is **still unchanged**.
+  Replacing it is the final launch gate (after human review, loop QA and the
+  backup video) and has not been authorised.
+- `/prototype.html` stays as the approved visual reference.
+- Still static, no build step, relative URLs only, nothing loaded from
+  outside the repository (no CDNs, no Google Fonts, no Drive).
+- `assets/img/` now holds the 102 selected web derivatives (~31 MB total,
+  JPEG q83, ≤2400 px, metadata stripped). Nothing from the masters or the
+  working library is committed.
+- **`.gitignore` trap:** the asset-safety rule `*manifest*` silently hides any
+  file with "manifest" in its name. The scene data therefore lives in
+  `assets/js/sequence.js`. Before every commit run
+  `git status --porcelain --ignored` and confirm no site file is ignored.
+- Event-day use: open `/presentation.html`, click once (or press `F`) for
+  fullscreen. It starts by itself and loops forever; after the first loop
+  every photograph is already in the page, so a Wi-Fi drop does not stop it.

@@ -1,83 +1,109 @@
-# Implementation status — live three-screen prototype
+# Implementation status — full 11-movement presentation
 
-Updated: 2026-09-19 (prototype stage).
+Updated: 2026-09-19 (full build, awaiting human review).
 
 ## What exists now
 | Item | Value |
 |---|---|
-| Stage | LIVE THREE-SCREEN PROTOTYPE (human visual gate) |
-| Prototype URL | https://ndumiso-y.github.io/dr-founa-tebeila-60th/prototype.html |
+| Stage | FULL PRESENTATION BUILT — next gate is the full-presentation human review |
+| Presentation URL | https://ndumiso-y.github.io/dr-founa-tebeila-60th/presentation.html |
+| Prototype URL (approved reference) | https://ndumiso-y.github.io/dr-founa-tebeila-60th/prototype.html |
 | Root holding page | UNCHANGED — https://ndumiso-y.github.io/dr-founa-tebeila-60th/ |
+| Sequence | 11 movements · 44 scenes · 102 photographs · 6:11.5 loop |
+| Final opening | THE WALL (FT-0197), type on the right, "Dr Founa Tebeila" |
+| Closing | FT-0056 (reserved for the closing only), dissolves back into The Wall |
 | Pages method | Deploy from branch `main`, folder `/ (root)` (unchanged) |
-| Base-path handling | All URLs relative — safe under `/dr-founa-tebeila-60th/` |
-| Build step | None (static). No Vite yet; if adopted later, `base: '/dr-founa-tebeila-60th/'` per DEPLOYMENT_NOTES.md |
-| Runtime dependencies | None. Fonts self-hosted (woff2, vendored from @fontsource); no CDNs, no frameworks |
+| Build step | None (static). All URLs relative — safe under `/dr-founa-tebeila-60th/` |
+| Runtime dependencies | None. Self-hosted woff2 fonts; no CDNs, no Google Fonts, no Drive |
 
-## Architecture (seed of the final deck — not disposable)
+## Architecture
 ```
-prototype.html          three scenes on the shared stage
-assets/css/tokens.css   colour / typography / motion / stage tokens (Design Constitution)
-assets/css/stage.css    16:9 stage scaler (1920x1080 logical canvas, forest letterbox)
-assets/css/scenes.css   scene compositions (archetypes: hero split, archival pair, full-bleed)
-assets/js/stage.js      uniform-fit scaling
-assets/js/deck.js       scene engine (activation model; gains timeline/autoplay/loop in full build)
-assets/fonts/           Playfair Display 400/500 + DM Sans 400/500 (woff2)
-assets/img/             prototype photographs only (web derivatives)
+presentation.html        empty 16:9 stage; everything is built from the sequence
+prototype.html           the approved three-screen reference (unchanged behaviour)
+assets/css/tokens.css    colour / type / motion tokens (Design Constitution)
+assets/css/stage.css     1920x1080 logical stage, uniform scaling, forest letterbox
+assets/css/scenes.css    the approved prototype compositions (.s1 Studio, .s2 Wedding, .s3 Wall)
+assets/css/deck.css      full-build materials: canvases, mounts, type roles, entrances, seams
+assets/js/stage.js       uniform-fit scaler
+assets/js/sequence.js    THE SCENE MANIFEST — one entry per scene (see below)
+assets/js/images.js      generated: pixel size of every derivative (layout keeps true ratios)
+assets/js/deck.js        engine: prototype mode (no manifest) or timeline mode (manifest)
+assets/img/ft-XXXX.jpg   102 web derivatives, named by canonical FT ID
+tools/build_derivatives.py   working copy -> derivative (rotation, crop, resize) + images.js
+tools/scene_report.js        audit table, runtime, photo count, duplicate/unused checks
+```
+The scene data file is called `sequence.js`, not `manifest.js`, because the
+repository's asset-safety `.gitignore` ignores `*manifest*`.
+
+### A scene entry
+`id`, `mv` (movement), `layout` (archetype), `bg`, `dur` (ms — the scene's whole
+slot, from the start of its entrance to the start of the next one), `tr`
+(`fade` 0.9 s · `slow` 1.8 s · `wipe` colour-field chapter seam · `loop` 2 s),
+`steps` (montage / numeral beats) and `items` — photographs (`M()` archival
+mount, `P()` plain), type roles, rules — placed in design pixels. Geometry is
+per scene on purpose: every scene is art-directed; nothing is a template slot.
+The two approved prototype compositions (The Wall, Wedding Day) are reused
+verbatim through their original classes.
+
+### Engine behaviour (assets/js/deck.js)
+- Starts by itself, advances by per-scene duration, loops forever.
+- The incoming scene dissolves in ON TOP of a still-opaque outgoing scene, so
+  no seam can dip to the canvas colour: no black/white flash, including the
+  closing -> opening loop seam (2 s, same type position on both sides).
+- Chapter seams: a cream / mint / forest field wipes across and the chapter
+  opener is revealed beneath it.
+- Preloading: image sources are assigned in playback order, three at a time,
+  starting with the opening; upcoming scenes are decoded ~1.6 s before use.
+  A scene is never shown until its photographs are decoded — the current
+  scene holds instead; a scene whose images truly fail is stepped over.
+  After one loop every image is in the document: a Wi-Fi drop does not stop it.
+- `prefers-reduced-motion`: drift off, wipes become cuts/fades, transitions 1 ms.
+- Screen wake lock requested; cursor hidden; click or `F` toggles fullscreen.
+- No interface is ever drawn. QA only: `←/→` step · `Space` pause · `Home`
+  restart · `D` or `?debug=1` HUD · `?scene=12` · `?pause=1` · `?step=0|1|all`.
+
+## Photographs
+- 102 displayed, every one a canonical FT ID resolved through
+  `photo-visual-intelligence.csv`; no duplicate/sequence group contributes more
+  than one image; no photograph appears twice (checked by `scene_report.js`).
+- Derivatives: from `02_WORKING_PHOTOS` only, ≤2400 px (heroes) / ≤1600–2000 px
+  (others), JPEG q83, progressive, metadata stripped, never upscaled, no
+  sharpening or colour work. Masters and working copies are untouched.
+- Derivative-only corrections: 90° rotation for FT-0136, 0138, 0109, 0176, 0193;
+  white scanner borders trimmed; re-photographed prints cropped to the print.
+- **Patient privacy:** FT-0430 is cropped to the clinician alone (top half of
+  the frame; the patient is entirely outside the derivative). Every other
+  frame containing a patient (FT-0395, 0396, 0446, 0447, 0451, 0452) is
+  excluded. FT-0420 and FT-0448 show staff only.
+
+## Copy
+Sparse and source-supported only: chapter titles, "From the family archive",
+folder-sourced mount labels, "Refodile Health Centre · Dr F. Tebeila (Dentist)"
+(read from the banner in FT-0414), the date, and the opening/closing lines.
+No decades, relationships, occasions or qualifications are stated; the modern
+graduation, heritage-attire and village-day frames run uncaptioned because
+their context is still open in `needs-human-context.csv`.
+
+## Verification (local, 2026-09-19 — Playwright + Chromium, Python static server)
+- Two uninterrupted real-time loops at 1920×1080: **371.8 s and 371.8 s**
+  (6:11.8; planned 6:11.5). 89 scene changes in order; 1,492 DOM samples with
+  0 blank frames, 0 scrollbars, 0 interface elements; 0 console errors,
+  0 failed requests.
+- All 44 scenes screenshotted at 1920×1080 and 1280×800: every image loaded,
+  nothing outside the stage, all four woff2 fonts `loaded`.
+- Reduced motion: drift `none`, transitions 1 ms, no seam, autoplay still advances.
+- Loop seam and 54 → 60 frames captured mid-transition and reviewed.
+- Review outputs (outside this repo): `05_OUTPUTS\FULL_BUILD_REVIEW\`.
+
+## Rebuilding
+```
+py tools/build_derivatives.py [--force]   # needs Pillow (+ pillow-heif for HEIC working copies)
+node tools/scene_report.js                # audit the sequence
+py -m http.server 8731                    # preview; check the port is really yours
 ```
 
-## Prototype photographs (canonical FT IDs; masters untouched)
-| File | FT ID | Note |
-|---|---|---|
-| assets/img/ft-0274.jpg | FT-0274 | Screen 1 hero (studio, 1200×1800, q85, metadata stripped) |
-| assets/img/ft-0155.jpg | FT-0155 | Screen 2 archival mount A (1239×1830, q85, scan geometry untouched; 10px CSS inset crop hides scanner margins) |
-| assets/img/ft-0157.jpg | FT-0157 | Screen 2 archival mount B (1237×1842, q85, geometry untouched) |
-| assets/img/ft-0197.jpg | FT-0197 | Screen 3 full-bleed — deliberate 16:9 art crop (2400×1350, q84) from the 6016×4016 working copy: full width, rows 240–3624 |
-No patients, no rotated scans, no NEF, no raw library material in the repo.
-
-## Verification (local, pre-push — 2026-09-19)
-- Served statically (`py -m http.server`), driven with Playwright + Chrome.
-- 1920×1080: all 14 requests 200, zero console messages, no page errors,
-  no overflow (scrollWidth = clientWidth), all four woff2 fonts report
-  `loaded` via `document.fonts`, images render at their native ratio.
-- 1280×800: stage scales to 0.667 and letterboxes in forest (40px bars).
-- `prefers-reduced-motion: reduce`: entrance transitions collapse to 1 ms,
-  Screen 3 drift animation is removed.
-- Keyboard ←/→ and the index labels both switch scenes; root `index.html`
-  and `styles.css` are byte-for-byte unchanged (holding page verified).
-- Review screenshots (authoritative, from this tree):
-  `05_OUTPUTS\PROTOTYPE_REVIEW\01_WHITE_STUDIO.png`,
-  `02_WEDDING_EDITORIAL.png`, `03_THE_WALL.png` (outside this repo).
-
-## Screen 3 composition note
-FT-0197's genuine negative space is the open stone field to the RIGHT of
-the figure; the left third holds the arched niche and benches. Rendered
-review showed left-placed type crossing the niche edge and the bench top,
-so the type column (ghost "60", overline, two-line name, rule, date) sits
-in the right stone field (x ≥ 1300), clear of her face and extended hand,
-with a restrained forest multiply-grade deepening toward the right edge
-to seat the cream type. The Wall vs White Studio decision remains open.
-
-## Commits
-- Starting SHA (foundation): 3f24bbce1a44d56e60ca491175dfc791cb02de1b
-- Prototype commit: see git log (created after this file was added).
-
-## Known constraints
-- GitHub Pages serves committed files as-is; no build pipeline to break.
-- FT-0274 source is 1200×1800 — comfortable at its 720px display column;
-  do not enlarge beyond ~50% stage width.
-- Screen 3 uses a pre-composed art crop; recropping means regenerating the
-  derivative, not CSS object-position tweaks.
-- Local preview: port 5173 may be held by an unrelated Vite dev server on
-  this machine; any free port works (`py -m http.server 5174`).
-
-## Remaining before full build (in order)
-1. HUMAN SCREENSHOT REVIEW of the three screens (this gate).
-2. ONE DESIGN CORRECTION PASS from that review.
-3. HUMAN OPENING SELECTION (White Studio vs The Wall — undecided).
-4. FULL 11-MOVEMENT BUILD: deck.js gains timeline/autoplay/preload/loop;
-   ~40–44 scenes, ~95–110 photographs, 6:05–6:30 runtime; continuous
-   Pages deployment; loop QA; video backup recording.
-
-## Decisions still open
-- Final opening: NOT selected (Screens 1 and 3 are live candidates).
-- Root index.html replacement: NOT authorised until full build.
+## Not done / next gates
+1. FULL PRESENTATION HUMAN REVIEW (this gate).
+2. Final correction pass.
+3. Backup video recording — NOT created.
+4. Root launch (`index.html` replacement) — NOT authorised, NOT done.
