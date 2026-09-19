@@ -45,7 +45,7 @@ No patients, no rotated scans, no NEF, no raw library material in the repo.
 - Keyboard ←/→ and the index labels both switch scenes; root `index.html`
   and `styles.css` are byte-for-byte unchanged (holding page verified).
 - Review screenshots (authoritative, from this tree):
-  `05_OUTPUTS\PROTOTYPE_REVIEW_WHITE_STUDIO.png`,
+  `05_OUTPUTS\PROTOTYPE_REVIEW\01_WHITE_STUDIO.png`,
   `02_WEDDING_EDITORIAL.png`, `03_THE_WALL.png` (outside this repo).
 
 ## Screen 3 composition note
