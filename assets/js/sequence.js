@@ -339,17 +339,20 @@
       ] },
 
     /* ================= 11 — CLOSING / RETURN TO 60 ================= */
-    { id: "s44-closing", mv: 11, layout: "Full-bleed cinematic", bg: "forest", dur: 12000, tr: "slow", cls: "sc--dark",
+    /* Loop seam: the closing's type lets go ~1.3 s before the scene ends, so the 2 s seam is
+       photograph dissolving into photograph and the name resolves once (in The Wall),
+       instead of two offset name blocks ghosting through each other. */
+    { id: "s44-closing", mv: 11, layout: "Full-bleed cinematic", bg: "forest", dur: 12000, tr: "slow", cls: "sc--dark", steps: [10700],
       items: [
         P(56, { x: 0, y: 0, w: 1920, h: 1080, drift: "out", fx: "none" }),
         { t: "panel", cls: "close__grade", fx: "none" },
         /* type lives in the open window panes right of her profile (x >= 1400),
-           clear of her face (x <= 1120) — and where The Wall's type sits, for the loop seam */
-        T("outline", "60", { x: 1384, y: 84, size: 440, fx: "fade", d: 900 }),
-        T("overline", "Happy 60th", { x: 1424, y: 596, d: 300 }),
-        T("name", "Dr&nbsp;Founa<br>Tebeila", { x: 1420, y: 638, size: 100, d: 550 }),
-        R({ x: 1424, y: 876, w: 120, cls: "rule--teal", d: 800 }),
-        T("date", "19&thinsp;.&thinsp;09&thinsp;.&thinsp;2026", { x: 1424, y: 900, d: 800 })
+           clear of her face (x <= 1120) — the same side as The Wall's type */
+        T("outline", "60", { x: 1384, y: 84, size: 440, fx: "fade", d: 900, until: 0 }),
+        T("overline", "Happy 60th", { x: 1424, y: 596, d: 300, until: 0 }),
+        T("name", "Dr&nbsp;Founa<br>Tebeila", { x: 1420, y: 638, size: 100, d: 550, until: 0 }),
+        R({ x: 1424, y: 876, w: 120, cls: "rule--teal", d: 800, until: 0 }),
+        T("date", "19&thinsp;.&thinsp;09&thinsp;.&thinsp;2026", { x: 1424, y: 900, d: 800, until: 0 })
       ] }
   ];
 

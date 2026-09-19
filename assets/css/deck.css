@@ -181,6 +181,8 @@
 .n60__field.on { clip-path: inset(0 0 0 0); }
 
 /* ---- Closing ---- */
+/* the closing's type simply fades before the loop seam (no scale-away) */
+.sc--dark .fx.off-again { transform: none; transition-duration: 1100ms; }
 .close__grade {
   inset: 0;
   /* seats the cream type in the window panes right of her profile; her face stays ungraded */
