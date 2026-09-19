@@ -166,12 +166,22 @@
     img.onerror = function () { done(false); };
     img.src = "assets/img/" + key(img.dataset.ft) + ".jpg" + (attempt ? "?r=" + attempt : "");
   }
+  /* Opening assets first. The rest of the library is queued only once the
+     page's own load event has fired, so the document finishes loading in a
+     moment instead of looking busy until all ~31 MB have arrived. */
   function enqueueFrom(start) {
-    for (var k = 0; k < scenes.length; k++) {
-      var s = scenes[(start + k) % scenes.length];
-      s.imgs.forEach(function (img) { queue.push({ img: img, scene: s }); });
+    var AHEAD = 1; /* the first scene gets the whole connection to itself */
+    function add(from, to) {
+      for (var k = from; k < to; k++) {
+        var s = scenes[(start + k) % scenes.length];
+        s.imgs.forEach(function (img) { queue.push({ img: img, scene: s }); });
+      }
+      pump();
     }
-    pump();
+    add(0, AHEAD);
+    var rest = function () { if (rest) { rest = null; add(AHEAD, scenes.length); } };
+    if (document.readyState === "complete") rest();
+    else { window.addEventListener("load", function () { rest && rest(); }); setTimeout(function () { rest && rest(); }, 6000); }
   }
   function warm(s) {
     s.imgs.forEach(function (img) { if (img.decode) img.decode().catch(function () {}); });

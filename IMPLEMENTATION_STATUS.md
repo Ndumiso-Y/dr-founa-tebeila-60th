@@ -52,8 +52,10 @@ verbatim through their original classes.
   closing -> opening loop seam (2 s, same type position on both sides).
 - Chapter seams: a cream / mint / forest field wipes across and the chapter
   opener is revealed beneath it.
-- Preloading: image sources are assigned in playback order, three at a time,
-  starting with the opening; upcoming scenes are decoded ~1.6 s before use.
+- Preloading: the opening scene loads alone first (first frame in ~1.8 s on
+  a simulated 4 Mbit/s link, cache off); after the page's load event the rest
+  is fetched in playback order, three at a time, and upcoming scenes are
+  decoded ~1.6 s before use. On that throttled link no scene was ever held.
   A scene is never shown until its photographs are decoded — the current
   scene holds instead; a scene whose images truly fail is stepped over.
   After one loop every image is in the document: a Wi-Fi drop does not stop it.
