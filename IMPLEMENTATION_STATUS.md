@@ -86,11 +86,23 @@ No decades, relationships, occasions or qualifications are stated; the modern
 graduation, heritage-attire and village-day frames run uncaptioned because
 their context is still open in `needs-human-context.csv`.
 
-## Verification (local, 2026-09-19 — Playwright + Chromium, Python static server)
-- Two uninterrupted real-time loops at 1920×1080: **371.8 s and 371.8 s**
-  (6:11.8; planned 6:11.5). 89 scene changes in order; 1,492 DOM samples with
-  0 blank frames, 0 scrollbars, 0 interface elements; 0 console errors,
-  0 failed requests.
+## Verification (2026-09-19 — Playwright + Chromium; local static server AND the live Pages site)
+- LIVE, final commit: two uninterrupted real-time loops at 1920×1080 —
+  **371.87 s and 371.84 s** (6:11.9; planned 6:11.5). 89 scene changes in
+  order, no scene held for images; 1,493 DOM samples with 0 blank frames,
+  0 scrollbars, 0 interface elements; 0 console errors/warnings, 0 failed
+  requests; first frame ~2 s after navigation. The local two-loop run matched
+  (371.8 s / 371.8 s).
+- All 118 deployed URLs return 200; the root holding page is byte-identical
+  to the original commit.
+- In-page timing (no screenshots involved): the 54 → 60 beat fires at
+  4.605 s (planned 4.600); loop-seam opacity of the incoming opening is
+  0.02 / 0.15 / 0.62 / 0.92 / 1.0 at 0.2 / 0.5 / 1.0 / 1.5 / 1.9 s — a true
+  2 s dissolve; the closing is hidden once it completes. The closing's type
+  fades ~1.3 s before the seam so two name blocks never ghost together.
+- Simulated 4 Mbit/s link, cache off: first frame 1.8 s, no scene held, 0 blanks.
+- Known, harmless: starting QA at a later scene (`?scene=N`) logs a browser
+  "preloaded but not used" warning for the opening image. Normal starts do not.
 - All 44 scenes screenshotted at 1920×1080 and 1280×800: every image loaded,
   nothing outside the stage, all four woff2 fonts `loaded`.
 - Reduced motion: drift `none`, transitions 1 ms, no seam, autoplay still advances.
