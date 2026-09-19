@@ -38,21 +38,36 @@
         '<p class="s3__date fx-rise fx-d2">19&thinsp;.&thinsp;09&thinsp;.&thinsp;2026</p>' +
         '<p class="s3__line fx-rise fx-d2">A Celebration in Shades of Green</p>' },
 
-    /* ================= 02 — YOUNG FOUNA / BEGINNINGS ================= */
-    { id: "s02-young-founa", mv: 2, layout: "Chapter opener + single archival artifact", bg: "cream", dur: 8500, tr: "wipe", wipe: "r",
+    /* ================= 02 — YOUNG FONA / BEGINNINGS =================
+       "Fona" is the client's spelling for these early years only; the present-day
+       name everywhere else stays Dr Founa Tebeila.
+       Part A (s02): the earliest archive, FT-0295/0296/0297.
+       Part B (s03): Pretoria / pre-family years, FT-0466..0471 — context confirmed
+       by the client; no dates, places, relationships or occasions are stated.
+       Filename order is kept and is not a claim about exact chronology. */
+    { id: "s02-young-fona", mv: 2, layout: "Chapter opener + three archival artifacts", bg: "cream", dur: 8500, tr: "wipe", wipe: "r",
       items: [
         ghost("02", { r: -60, y: 190 }),
-        M(297, { x: 190, y: 234, h: 580, cap: "Young Founa &middot; family archive", d: 250 }),
+        M(296, { x: 120, y: 120, h: 560, d: 250 }),
+        M(297, { x: 590, y: 110, h: 380, cap: "Young Fona &middot; family archive", d: 450 }),
+        M(295, { x: 660, y: 580, h: 400, d: 650 }),
         T("overline", "Chapter&nbsp;02", { x: 1100, y: 352 }),
-        T("title", "Young<br>Founa", { x: 1094, y: 394, d: 200 }),
+        T("title", "Young<br>Fona", { x: 1094, y: 394, d: 200 }),
         R({ x: 1100, y: 690, d: 380 }),
         T("note", "Beginnings", { x: 1100, y: 716, d: 380 })
       ] },
-    { id: "s03-beginnings-pair", mv: 2, layout: "Archival pair", bg: "cream", dur: 8000, tr: "fade",
+    /* two beats of three inside one scene: beat 1 lets go, beat 2 arrives */
+    { id: "s03-pretoria-years", mv: 2, layout: "Three-portrait editorial grid, two beats", bg: "cream", dur: 11000, tr: "fade", steps: [5200],
       items: [
-        M(296, { x: 300, y: 140, h: 690 }),
-        M(295, { x: 960, y: 430, h: 470, d: 300 }),
-        T("cap", "Young Founa &middot; family archive", { x: 962, y: 960, d: 600 })
+        M(466, { x: 140, y: 90, h: 620, until: 0 }),
+        M(467, { x: 730, y: 260, h: 620, d: 260, until: 0 }),
+        M(468, { x: 1320, y: 130, h: 620, d: 520, until: 0 }),
+        M(469, { x: 150, y: 240, h: 620, step: 1, d: 750 }),
+        M(470, { x: 740, y: 90, h: 620, step: 1, d: 1000 }),
+        M(471, { x: 1320, y: 170, h: 620, step: 1, d: 1250 }),
+        T("overline", "Pretoria Years", { x: 1322, y: 896, d: 700 }),
+        R({ x: 1322, y: 932, w: 96, d: 850 }),
+        T("note", "From the family archive", { x: 1322, y: 952, d: 850 })
       ] },
 
     /* ================= 03 — EARLY FAMILY LIFE ================= */
@@ -358,7 +373,7 @@
 
   window.DECK_MANIFEST = {
     title: "Dr Founa Tebeila · 60",
-    movements: ["Opening / 60", "Young Founa / Beginnings", "Early Family Life", "Graduation", "Wedding Day",
+    movements: ["Opening / 60", "Young Fona / Beginnings", "Early Family Life", "Graduation", "Wedding Day",
       "Family Holidays / Near and Far", "Friends, Family & Joy", "Dentistry, Refodile & Community",
       "Milestones Through the Years", "Today", "Closing / Return to 60"],
     scenes: scenes

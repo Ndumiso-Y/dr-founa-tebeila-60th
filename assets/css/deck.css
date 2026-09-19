@@ -152,6 +152,9 @@
 .fx-ghost.on  { opacity: var(--ghost, 0.055); }
 .fx.off-again { opacity: 0; transform: scale(1.06); transition-duration: 1500ms; transition-delay: 0ms; }
 
+/* archival mounts leave a beat quietly: a fade and a small lift, never a scale-away */
+.mount.fx.off-again { transform: translateY(-14px); transition-duration: 900ms; }
+
 /* ---- Photographic drift (<= 4%), runs for the life of the scene ---- */
 .scene.is-active .drift-in  { animation: drift-in  var(--dur, 9s) linear both; }
 .scene.is-active .drift-out { animation: drift-out var(--dur, 9s) linear both; }

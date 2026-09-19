@@ -1,15 +1,57 @@
 # Implementation status — full 11-movement presentation
 
-Updated: 2026-09-19 (full build, awaiting human review).
+Updated: 2026-09-19 (client-approved build + the Young Fona / Pretoria Years revision).
+
+## Revision — Young Fona, Pretoria years (2026-09-19)
+A single surgical change to Movement 02. Nothing else in the approved deck moved:
+a pixel comparison of all 44 scene stills against the approved review set shows
+42 identical scenes; only `s02` and `s03` differ.
+
+| Item | Value |
+|---|---|
+| Starting SHA | 6c121a5ea81d336ff51cccc19795a99d98bfc937 (client-approved state) |
+| Revision commit | see `git log` — "feat: extend Young Fona story with Pretoria years" |
+| New files found | 6 masters + 6 working copies, `Young Fona - Pretoria Years - 01…06.jpeg` |
+| Master path | `01_ORIGINAL_PHOTOS\Young Founa\` (read only; never modified) |
+| Working path | `02_WORKING_PHOTOS\Young Founa\` (derivative source; never modified) |
+| Master / working hashes | all six pairs byte-identical (MD5) |
+| Duplicate result | UNIQUE ×6 — no exact (MD5) match among 930 library files; nearest perceptual-hash distance 89/256 bits (unrelated); confirmed by eye |
+| Assigned FT IDs | FT-0466 … FT-0471, in filename order (registry previously ended at FT-0465) |
+| Registry | rows appended to `photo-inventory.csv` (465→471) and `photo-visual-intelligence.csv` (353→359); existing bytes verified untouched; backups in `03_ASSET_INVENTORY\BACKUPS\…pre-pretoria-years.csv`. No duplicate/sequence group applies, so that file is unchanged |
+| Movements / scenes / photographs | 11 / 44 (unchanged) / 108 (was 102) |
+| Runtime | planned 6:11.5 → **6:14.5** (+3.0 s, +0.8 %); observed 371.9 s → 374.8 s |
+| Keyboard controls | preserved exactly: ← previous · → next · Space pause/resume · F fullscreen |
+| Visible presenter controls | NOT added — the interface stays invisible |
+| Engine | `assets/js/deck.js` untouched |
+
+**Revised Movement 02 — "Young Fona / Beginnings"** (the client's spelling for these
+early years only; "Dr Founa Tebeila" is unchanged everywhere else, and the source
+folder keeps its name):
+- `s02-young-fona` (8.5 s, unchanged length) — Part A, the earliest archive:
+  FT-0296, FT-0297, FT-0295 as three mounted artifacts beside the chapter title.
+- `s03-pretoria-years` (11.0 s, was 8.0 s) — Part B, Pretoria / pre-family years,
+  two beats of three inside one scene using the existing `steps`/`until` mechanism:
+  beat 1 FT-0466, 0467, 0468 → at 5.2 s they lift and fade → beat 2 FT-0469, 0470, 0471.
+  Copy: "Pretoria Years" and "From the family archive" only.
+- then Movement 03, Early Family Life, exactly as before.
+
+Files changed: `assets/js/sequence.js` (Movement 02 only), `assets/css/deck.css`
+(one rule: archival mounts leave a beat with a fade and a 14 px lift),
+`tools/build_derivatives.py` (six spec entries), `assets/js/images.js` (generated),
+six new derivatives. Derivative-only corrections: each print cropped to its edges;
+FT-0470 is a sideways print, rotated 90° in the derivative. Sources are 960×1280, so
+the prints are shown at 620 px tall and never enlarged. No dates, places beyond the
+client-confirmed Pretoria context, relationships or occasions are stated; filename
+order is kept and is not a claim about exact chronology.
 
 ## What exists now
 | Item | Value |
 |---|---|
-| Stage | FULL PRESENTATION BUILT — next gate is the full-presentation human review |
+| Stage | CLIENT-APPROVED BUILD + YOUNG FONA REVISION — next gate is final human approval |
 | Presentation URL | https://ndumiso-y.github.io/dr-founa-tebeila-60th/presentation.html |
 | Prototype URL (approved reference) | https://ndumiso-y.github.io/dr-founa-tebeila-60th/prototype.html |
 | Root holding page | UNCHANGED — https://ndumiso-y.github.io/dr-founa-tebeila-60th/ |
-| Sequence | 11 movements · 44 scenes · 102 photographs · 6:11.5 loop |
+| Sequence | 11 movements · 44 scenes · 108 photographs · 6:14.5 loop |
 | Final opening | THE WALL (FT-0197), type on the right, "Dr Founa Tebeila" |
 | Closing | FT-0056 (reserved for the closing only), dissolves back into The Wall |
 | Pages method | Deploy from branch `main`, folder `/ (root)` (unchanged) |
@@ -28,7 +70,7 @@ assets/js/stage.js       uniform-fit scaler
 assets/js/sequence.js    THE SCENE MANIFEST — one entry per scene (see below)
 assets/js/images.js      generated: pixel size of every derivative (layout keeps true ratios)
 assets/js/deck.js        engine: prototype mode (no manifest) or timeline mode (manifest)
-assets/img/ft-XXXX.jpg   102 web derivatives, named by canonical FT ID
+assets/img/ft-XXXX.jpg   108 web derivatives, named by canonical FT ID
 tools/build_derivatives.py   working copy -> derivative (rotation, crop, resize) + images.js
 tools/scene_report.js        audit table, runtime, photo count, duplicate/unused checks
 ```
@@ -65,7 +107,7 @@ verbatim through their original classes.
   restart · `D` or `?debug=1` HUD · `?scene=12` · `?pause=1` · `?step=0|1|all`.
 
 ## Photographs
-- 102 displayed, every one a canonical FT ID resolved through
+- 108 displayed, every one a canonical FT ID resolved through
   `photo-visual-intelligence.csv`; no duplicate/sequence group contributes more
   than one image; no photograph appears twice (checked by `scene_report.js`).
 - Derivatives: from `02_WORKING_PHOTOS` only, ≤2400 px (heroes) / ≤1600–2000 px
@@ -86,7 +128,7 @@ No decades, relationships, occasions or qualifications are stated; the modern
 graduation, heritage-attire and village-day frames run uncaptioned because
 their context is still open in `needs-human-context.csv`.
 
-## Verification (2026-09-19 — Playwright + Chromium; local static server AND the live Pages site)
+## Verification of the approved 102-photograph build (2026-09-19 — Playwright + Chromium; local static server AND the live Pages site)
 - LIVE, final commit: two uninterrupted real-time loops at 1920×1080 —
   **371.87 s and 371.84 s** (6:11.9; planned 6:11.5). 89 scene changes in
   order, no scene held for images; 1,493 DOM samples with 0 blank frames,

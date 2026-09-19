@@ -52,7 +52,7 @@ The complete 11-movement presentation is served at
 - `/prototype.html` stays as the approved visual reference.
 - Still static, no build step, relative URLs only, nothing loaded from
   outside the repository (no CDNs, no Google Fonts, no Drive).
-- `assets/img/` now holds the 102 selected web derivatives (~31 MB total,
+- `assets/img/` now holds the 108 selected web derivatives (~32 MB total,
   JPEG q83, ≤2400 px, metadata stripped). Nothing from the masters or the
   working library is committed.
 - **`.gitignore` trap:** the asset-safety rule `*manifest*` silently hides any
